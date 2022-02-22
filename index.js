@@ -17,22 +17,31 @@ document.getElementById('save').addEventListener('click',
 
 // BlackJack
 
-let firstCard = getRandomCard();
-let secondCard = getRandomCard();
-let cards = [firstCard, secondCard]
-let sum = firstCard + secondCard
+let cards = []
+let sum = 0
 let blackjack = false
-let isAlive = true
+let isAlive = false
 let message = '';
 let messageEl = document.getElementById('message')
 let sumEl = document.querySelector('#sum-el')
 let cardsEl = document.querySelector("#cards-el")
 
 function getRandomCard(){
-    return 5
+    let randCard = Math.floor(Math.random() * 13) + 1
+    if(randCard === 1){
+        randCard = 11
+    }
+    else if(randCard >10){
+        randCard = 10
+    }
+    return randCard
 }
-
 function startGame(){
+    isAlive = true
+    let first = getRandomCard()
+    let second  = getRandomCard()
+    cards = [first, second]
+    sum = first + second
     renderGame()
 }
 
