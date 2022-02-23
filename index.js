@@ -26,6 +26,16 @@ let messageEl = document.getElementById('message')
 let sumEl = document.querySelector('#sum-el')
 let cardsEl = document.querySelector("#cards-el")
 
+let player = {
+    name: "Abhay Aggarwal",
+    chips: 145,
+    sayHello: function(){
+        console.log('Hello World')
+    }
+}
+let playerEl = document.getElementById("player-el")
+playerEl.textContent = player.name + ": $" + player.chips
+
 function getRandomCard(){
     let randCard = Math.floor(Math.random() * 13) + 1
     if(randCard === 1){
@@ -38,6 +48,7 @@ function getRandomCard(){
 }
 function startGame(){
     isAlive = true
+    blackjack = false
     let first = getRandomCard()
     let second  = getRandomCard()
     cards = [first, second]
@@ -65,9 +76,11 @@ function renderGame() {
     messageEl.textContent = message;
 }
 function newCard(){
-    let card = getRandomCard()
-    cards.push(card)
-    sum += card
+    if(isAlive && !blackjack){
+        let card = getRandomCard()
+        cards.push(card)
+        sum += card
 
-    renderGame()
+        renderGame()
+    }
 }
